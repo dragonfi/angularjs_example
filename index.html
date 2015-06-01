@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/app.js"></script>
+<link rel="stylesheet" href="css/app.css" />
+</head>
+<body ng-app="Adventure">
+<div ng-controller="Pythagorean as p">
+    <h1>Pythagorean theorem:</h1>
+    <p>a = <input type="number" ng-min="0" ng-model="p.a" ng-change="p.onChange()"></input></p>
+    <p>b = <input type="number" ng-min="0" ng-model="p.b" ng-change="p.onChange()"></input></p>
+    <p>c = {{p.c()}}</p>
+    <p><button ng-click="p.onChange()">Change!</button> Changes: {{p.changes}}</p>
+</div>
+</body>
+</html>

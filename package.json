@@ -1,0 +1,16 @@
+{
+  "name": "adventure",
+  "version": "0.0.0",
+  "description": "ERROR: No README data found!",
+  "main": "index.html",
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-mocks": "~1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "karma start karma.config.js --single-run"
+  },
+  "author": "",
+  "license": "MIT"
+}
