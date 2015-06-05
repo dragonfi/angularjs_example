@@ -17,11 +17,25 @@ describe('geometry module', function() {
         it("should compute c when a and b are provided", function() {
             pythagorean.a = 3;
             pythagorean.b = 4;
-            expect(pythagorean.c()).toEqual(5);
+            pythagorean.onChange('a');
+            expect(pythagorean.c).toEqual(5);
 
             pythagorean.a = 10;
             pythagorean.b = 24;
-            expect(pythagorean.c()).toEqual(26);
+            pythagorean.onChange('b');
+            expect(pythagorean.c).toEqual(26);
+        });
+
+        it("should compute a when c and b are provided", function() {
+            pythagorean.c = 5;
+            pythagorean.b = 4;
+            pythagorean.onChange('c');
+            expect(pythagorean.a).toEqual(3);
+
+            pythagorean.c = 26;
+            pythagorean.b = 24;
+            pythagorean.onChange('c');
+            expect(pythagorean.a).toEqual(10);
         });
     });
 });
