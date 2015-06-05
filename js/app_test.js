@@ -7,19 +7,8 @@ describe('Adventure', function() {
         $controller = _$controller_;
     }));
 
-    describe("Pythagorean", function() {
-        var pythagorean;
-        var scope;
-
-        beforeEach(function(){
-            scope = {};
-            pythagorean = $controller("Pythagorean", {$scope: scope});
-        });
-
-        it("MyAppController.foo should contain foo", function() {
-            pythagorean.a = 4;
-            pythagorean.b = 5;
-            expect(pythagorean.c()).toEqual(16 + 25);
-        });
+    it("includes Pythagorean", function() {
+        pythagorean = $controller("Pythagorean");
+        expect(pythagorean).toBeDefined();
     });
 });
