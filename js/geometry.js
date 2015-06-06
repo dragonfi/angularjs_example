@@ -1,29 +1,38 @@
 (function(){
     angular.module('geometry', [])
-    .controller('Pythagorean', function(){
-        this.a = 0;
-        this.b = 0;
-        this.compute_c = function(){
-            return Math.sqrt(this.a * this.a + this.b * this.b);
-        };
-        this.compute_a = function(){
-            return Math.sqrt(this.c * this.c - this.b * this.b);
-        };
-        this.changes = 0;
-        this.onChange = function(side) {
-            this.changes += 1;
-            if (side=="a" || side=="b") {
-                this.c = this.compute_c();
-            };
-            if (side=="c") {
-                this.a = this.compute_a();
-            };
-        };
-    }).directive('pythagorean', function(){
+    .controller('Pythagorean', Pythagorean)
+    .directive('pythagorean', function(){
         return {
             restrict: "E",
             templateUrl: "html/pythagorean.html",
             controller: "Pythagorean as p",
         };
     });
+
+    Pythagorean.$inject = ['$scope'];
+    function Pythagorean($scope){
+        $scope.a = 0;
+        $scope.b = 0;
+        $scope.c = 0;
+        $scope.changes = 0;
+        function compute_c(scope){
+            var a = scope.a;
+            var b = scope.b;
+            return Math.sqrt(a * a + b * b);
+        };
+        function compute_a(scope){
+            var c = scope.c;
+            var b = scope.b;
+            return Math.sqrt(c * c - b * b);
+        };
+        $scope.changes = 0;
+        $scope.$watch(compute_c, function(newValue, oldValue, scope){
+            scope.c = newValue;
+            scope.changes += 1;
+        });
+        $scope.$watch(compute_a, function(newValue, oldValue, scope){
+            scope.a = newValue;
+            scope.changes += 1;
+        });
+    }
 })();

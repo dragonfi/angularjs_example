@@ -8,34 +8,40 @@ describe('geometry module', function() {
     }));
 
     describe("Pythagorean", function() {
+        var scope;
         var pythagorean;
 
-        beforeEach(function(){
-            pythagorean = $controller("Pythagorean");
-        });
+        beforeEach(angular.mock.inject(function($rootScope){
+            scope = $rootScope.$new();
+            pythagorean = $controller("Pythagorean", {$scope: scope});
+        }));
 
         it("should compute c when a and b are provided", function() {
-            pythagorean.a = 3;
-            pythagorean.b = 4;
-            pythagorean.onChange('a');
-            expect(pythagorean.c).toEqual(5);
+            scope.a = 3;
+            scope.b = 4;
+            scope.$digest();
+            expect(scope.c).toEqual(5);
 
-            pythagorean.a = 10;
-            pythagorean.b = 24;
-            pythagorean.onChange('b');
-            expect(pythagorean.c).toEqual(26);
+            scope.a = 10;
+            scope.b = 24;
+            scope.$digest();
+            expect(scope.c).toEqual(26);
         });
 
         it("should compute a when c and b are provided", function() {
-            pythagorean.c = 5;
-            pythagorean.b = 4;
-            pythagorean.onChange('c');
-            expect(pythagorean.a).toEqual(3);
+            scope.b = 4;
+            scope.$digest();
 
-            pythagorean.c = 26;
-            pythagorean.b = 24;
-            pythagorean.onChange('c');
-            expect(pythagorean.a).toEqual(10);
+            scope.c = 5;
+            scope.$digest();
+            expect(scope.a).toEqual(3);
+
+            scope.b = 24;
+            scope.$digest();
+
+            scope.c = 26;
+            scope.$digest();
+            expect(scope.a).toEqual(10);
         });
     });
 });

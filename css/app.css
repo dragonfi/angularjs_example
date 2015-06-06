@@ -4,6 +4,10 @@ input {
     border-width: 3px;
 }
 
+input:invalid {
+    box-shadow: none;
+}
+
 .ng-dirty.ng-invalid {
     border-color: red;
 }
