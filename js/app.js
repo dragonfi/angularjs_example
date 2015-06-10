@@ -1,3 +1,3 @@
 (function(){
-    var app = angular.module('Adventure', ['geometry']);
+    var app = angular.module('Adventure', ['geometry', 'dvCalc']);
 })();
