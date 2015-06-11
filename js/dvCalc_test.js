@@ -62,7 +62,7 @@ describe('dvCalc module', function() {
                 expect(o1_to_o2).toBeCloseTo(1203.975, 3);
                 expect(o1_to_o2).toBe(o2_to_o1);
             });
-            it("should calculate correct value for elliptical", function(){
+            it("should calculate correct value for ellipticals", function(){
                 var o1 = dvCalc.newOrbitFromAltitude(kerbin, 200*km, 400*km);
                 var o2 = dvCalc.newOrbitFromAltitude(kerbin, 100*km, 300*Mm);
                 var o1_to_o2 = dvCalc.hohmannTransfer(o1, o2);
@@ -70,13 +70,31 @@ describe('dvCalc module', function() {
                 expect(o1_to_o2).toBeCloseTo(802.93, 1);
                 expect(o1_to_o2).toBe(o2_to_o1);
             });
-            it("should calculate correct value for elliptical 2", function(){
+            it("should calculate correct value for crossing", function(){
                 var o1 = dvCalc.newOrbitFromAltitude(kerbin, 100*km, 400*km);
                 var o2 = dvCalc.newOrbitFromAltitude(kerbin, 200*km, 300*Mm);
                 var o1_to_o2 = dvCalc.hohmannTransfer(o1, o2);
                 var o2_to_o1 = dvCalc.hohmannTransfer(o2, o1);
                 expect(o1_to_o2).toBeCloseTo(737.057, 3);
                 expect(o1_to_o2).toBe(o2_to_o1);
+            });
+        });
+        describe("escapeSpeed", function(){
+            it("should be the expected value", function(){
+                expect(dvCalc.escapeSpeed(kerbin, kerbin.radius + 100*km))
+                .toBeCloseTo(3176.521, 3);
+            });
+        });
+        describe("oberthEffect", function(){
+            it("should equal escapeSpeed for excess velocity of 0", function(){
+                expect(dvCalc.oberthReduction(
+                    kerbin, kerbin.radius + 100*km, 0)
+                ).toBe(dvCalc.escapeSpeed(kerbin, kerbin.radius + 100*km));
+            });
+            it("should return expected periapsis speed", function(){
+                expect(dvCalc.oberthReduction(
+                    kerbin, kerbin.radius + 100*km, 1000)
+                ).toBeCloseTo(3330.208, 3);
             });
         });
     });

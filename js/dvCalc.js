@@ -55,6 +55,14 @@
             var dv2 = Math.abs(target.speedAt('ap') - transfer.speedAt('ap'));
             return dv1 + dv2;
         };
+
+        this.escapeSpeed = function(body, radius){
+            return Math.sqrt(2 * body.gm / radius);
+        };
+        this.oberthReduction = function(body, radius, final_speed){
+            var v_esc = dvCalc.escapeSpeed(body, radius);
+            return Math.sqrt(v_esc*v_esc + final_speed*final_speed);
+        };
     };
 
     HohmannCalc.$inject = ['$scope'];
