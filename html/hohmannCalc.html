@@ -1,1 +1,13 @@
-It works!
+<p>Planet GM: <input type=number min=0 ng-model="planet.gm" ></input></p>
+<p>Origin orbit:
+    pe: <input type="number" step="1000" ng-model="o1.pe"></input> m.
+    ap: <input type="number" step="1000" ng-model="o1.ap"></input> m.
+</p>
+<p>Target orbit:
+    pe: <input type="number" step="1000" ng-model="o2.pe"></input> m.
+    ap: <input type="number" step="1000" ng-model="o2.ap"></input> m.
+</p>
+<p>DeltaV 1: {{dvCalc.hohmannTransfer(o1, o2).dv1}}</p>
+<p>DeltaV 2: {{dvCalc.hohmannTransfer(o1, o2).dv2}}</p>
+<p>DeltaV Total: {{dvCalc.transfer(o1, o2)}}</p>
+

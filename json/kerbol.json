@@ -1,0 +1,30 @@
+{bodies: [{
+    name: "Kerbol",
+    gm: 1.172332e18,
+    radius: 2.61e8,
+    atmospheric_height: 10000,
+    highest_elevation: 0,
+    oribt: null
+},{
+    name: "Kerbin",
+    gm: 0,
+    radius: 6e5,
+    atmospheric_height: 70000,
+    highest_elevation: 10000,
+    orbit: {
+        body: "Kerbol",
+        pe:
+        ap:
+    }
+},{
+    name: "Mun",
+    gm: 0,
+    radius: 2e5,
+    atmospheric_height: 0,
+    highest_elevation: 7200,
+    orbit: {
+        body: "Kerbin",
+        pe: 12e9,
+        ap: 12e9
+    }
+}]}

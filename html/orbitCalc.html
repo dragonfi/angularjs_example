@@ -1,0 +1,9 @@
+<p>Body:
+    <select ng-options="body.name for body in bodies" ng-model="orbit.body">
+    </select>
+    GM: {{orbit.body.gm}}
+</p>
+<p>Periapse: <input type="number" step="1000" ng-model="orbit.pe"></input></p>
+<p>Apoapse: <input type="number" step="1000" ng-model="orbit.ap"></input></p>
+<p>Periapse speed: {{orbit.speedAt('pe')}}</p>
+<p>Apoapse speed: {{orbit.speedAt('ap')}}</p>

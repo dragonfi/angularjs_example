@@ -1,0 +1,30 @@
+{bodies: {
+    name: "Sun",
+    gm: 1.32712440018e20,
+    radius: 6.96342e8,
+    atmospheric_height: 2e10,
+    highest_elevation: 0,
+    orbit: null
+},{
+    name: "Earth",
+    gm: 398600.4418,
+    radius: 6371000,
+    atmoshperic_height: 100000,
+    highest_elevation: 8848,
+    orbit: {
+        body: "Sun",
+        pe: 1.47e11
+        ap: 1.5193e11,
+    }
+},{
+    name: "Moon",
+    gm: 4902.8,
+    radius: 1737100,
+    atmospheric_height: 0,
+    highest_elevation: 8000,
+    orbit: {
+        body: "Earth",
+        pe: 3.626e8,
+        ap: 4.054e8
+    }
+}]}
