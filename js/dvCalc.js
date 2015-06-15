@@ -1,6 +1,7 @@
 (function(){
     angular.module('dvCalc', [])
     .service('dvCalc', dvCalcService)
+
     function dvCalcService(){
         dvCalc = this;
         var km = 1000;
@@ -65,6 +66,7 @@
             this.radius = obj.radius;
             this.highest_elevation = obj.highest_elevation;
             this.atmospheric_height = obj.atmospheric_height;
+            this.orbit = obj.orbit;
             return this;
         };
 
@@ -78,7 +80,13 @@
             return Math.max(atm, ele) + 10000;
         };
 
+        this.Body.prototype.lowestSafeOrbit = function(){
+            var r = this.minimumSafeRadius();
+            return new dvCalc.Orbit().fromRad(this, r, r);
+        };
+
         this.Body.prototype.oberthReduction = function(radius, v_inf){
+            radius = (radius === 'min') ? this.minimumSafeRadius() : radius;
             var v_esc = this.escapeSpeed(radius);
             return Math.sqrt(v_esc*v_esc + v_inf*v_inf);
         };
@@ -103,11 +111,40 @@
             return {dv1:dv1, dv2:dv2};
         };
 
+        this.hohmannTransferToSatellite = function(o1, o2){
+            var dvs = this.hohmannTransfer(o1, o2.body.orbit);
+            dvs.dv2 = o2.body.oberthReduction('min', dvs.dv2);
+            dvs.dv2 -= o2.body.lowestSafeOrbit().speedAt('pe');
+            return dvs;
+        };
+
+        this.hohmannTransferBetweenSatellites = function(o1, o2){
+            var dvs = this.hohmannTransfer(o1.body.orbit, o2.body.orbit);
+            console.log(dvs);
+            dvs.dv1 = o1.body.oberthReduction(o1.pe, dvs.dv1);
+            console.log(dvs);
+            dvs.dv1 -= o1.speedAt('pe');
+            console.log(dvs);
+            dvs.dv2 = o2.body.oberthReduction(o2.pe, dvs.dv2);
+            console.log(dvs);
+            dvs.dv2 -= o2.speedAt('pe');
+            console.log(dvs);
+            return dvs;
+        };
+
         this.transfer = function(o1, o2){
+            var dvs;
             if (o1.body === o2.body){
-                var dvs = this.hohmannTransfer(o1, o2);
-                return dvs.dv1 + dvs.dv2;
-            };
+                dvs = this.hohmannTransfer(o1, o2);
+            } else if (o2.body.orbit && o2.body.orbit.body === o1.body) {
+                dvs = this.hohmannTransferToSatellite(o1, o2);
+            } else if (o1.body.orbit && o1.body.orbit.body === o2.body) {
+                dvs = this.hohmannTransferToSatellite(o2, o1);
+            } else if (o1.body.orbit && o2.body.orbit
+                    && o1.body.orbit.body === o2.body.orbit.body) {
+                dvs = this.hohmannTransferBetweenSatellites(o1, o2);
+            }
+            return dvs.dv1 + dvs.dv2;
         };
     };
 })();

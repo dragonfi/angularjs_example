@@ -7,19 +7,19 @@
     oribt: null
 },{
     name: "Kerbin",
-    gm: 0,
+    gm: 3.5316e12,
     radius: 6e5,
     atmospheric_height: 70000,
     highest_elevation: 10000,
     orbit: {
         body: "Kerbol",
-        pe:
-        ap:
+        pe: 13599840256,
+        ap: 13599840256
     }
 },{
     name: "Mun",
-    gm: 0,
-    radius: 2e5,
+    gm: 6.5138398e10,
+    radius: 200000,
     atmospheric_height: 0,
     highest_elevation: 7200,
     orbit: {
@@ -27,4 +27,16 @@
         pe: 12e9,
         ap: 12e9
     }
+},{
+    name: "Minmus",
+    gm: 1.7658e9,
+    radius: 60000,
+    atmospheric_height: 0,
+    highest_elevation: 10000,
+    orbit: {
+        body: "Kerbin",
+        pe: 4.7e7,
+        ap: 4.7e7
+    }
 }]}
+

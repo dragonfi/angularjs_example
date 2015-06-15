@@ -31,7 +31,8 @@
             gm: 6.5138398e10
         })];
 
-        $scope.orbit = new dvCalc.Orbit($scope.bodies[0], 700000, 700000);
+        $scope.orbit = new dvCalc.Orbit().fromRad(
+            $scope.bodies[0], 700000, 700000);
     }
 
     hohmannCtrl.$inject = ["$scope", "dvCalc"];
@@ -43,8 +44,8 @@
             gm: 3.5316e12,
         };
         $scope.dvCalc = dvCalc;
-        $scope.o1 = new dvCalc.Orbit($scope.planet, 100000, 100000);
-        $scope.o2 = new dvCalc.Orbit($scope.planet, 100000, 100000);
+        $scope.o1 = new dvCalc.Orbit().fromAlt($scope.planet, 100000, 100000);
+        $scope.o2 = new dvCalc.Orbit().fromAlt($scope.planet, 100000, 100000);
         $scope.a = 3.14;
         $scope.foo = {
             a: 6.82,
